@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, Image, ScrollView, FlatList } from 'react-native';
+import { Text, View, TextInput, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 import ProdutoService from './produtoService';
@@ -19,7 +19,8 @@ export const CrudProdutos = () => {
 
 
   return (
-    <View>
+    <View style={styles.container}>
+
       <View style={styles.containerHeader}>
         <View style={styles.containerHeaderBack}>
           <Image source={IconBack} style={styles.back} />
@@ -32,31 +33,32 @@ export const CrudProdutos = () => {
           <Image source={IconDark} style={styles.switchModeDarkLight} />
         </View>
       </View>
+
       <View>
-        <Text style={styles.novoProduto}>Novo produto +</Text>
+        <TouchableOpacity><Text style={styles.novoProduto}>Novo produto +</Text></TouchableOpacity>
       </View>
       <View>
         <TextInput style={styles.inputSearch}></TextInput>
       </View>
+
       <FlatList data={produtos} keyExtractor={item => item.id} renderItem={({ item }) => (
-          <ScrollView>
-            <View>
-              <Text>{item.id}</Text>
-              <Text>{item.nome}</Text>
+          <ScrollView style={styles.item}>
+            <View style={styles.headerProduct}>
+              <Text style={styles.nome}>{item.nome}</Text>
+              <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
             </View>
-            <View>
+            <View style={styles.bodyProduct}>
               <Image
-                style={{ width: 50, height: 50 }}
+                style={{ width: 100, height: 100 }}
                 source={{ uri: item.fotoLink }}
               />
-              <View>
+              <View style={styles.bodyDescription}>
                 <Text>{item.descricao}</Text>
                 <Text>{item.nomeCategoria}</Text>
-                <Text>{item.valor}</Text>
               </View>
               <View>
-                {/* <Image source={caneta}></Image>
-                            <Image source={lixeira}></Image> */}
+                <Image style={styles.crudButtons} source={require('../../assets/icons/edit.png')}></Image>
+                <Image style={styles.crudButtons} source={require('../../assets/icons/trash.png')}></Image>
               </View>
             </View>
           </ScrollView>

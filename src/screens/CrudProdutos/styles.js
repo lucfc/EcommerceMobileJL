@@ -2,6 +2,9 @@ import { StyleSheet} from 'react-native';
 import { RotationGestureHandler } from 'react-native-gesture-handler';
 
 export const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'white'
+    },
     inputSearch:{
         borderRadius:5,
         color:'black',
@@ -57,5 +60,32 @@ export const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginBottom: 10,
         fontWeight:'bold'
+    },
+    item: {
+        marginLeft: 12
+    },
+    headerProduct: {
+        flexDirection: 'row'
+    },
+    bodyProduct: {
+        flexDirection: 'row'
+    },
+    bodyDescription: {
+        flex: 1,
+        marginLeft: 10
+    },
+    crudButtons: {
+        width: 25,
+        height: 25,
+        marginTop: 8,
+        marginRight: 15
+    },
+    nome: {
+        fontSize: 19.04, 
+        fontWeight: 'bold'
+    },
+    id: {
+        alignSelf: 'center', 
+        marginLeft: 10
     }
 })
