@@ -18,10 +18,14 @@ export const CrudProdutos = () => {
 
   return (
     <View>
-      <View>
-        <Image source={IconBack} /> 
-        <Text>Login</Text>
-      </View>
+
+      <View style={styles.containerHeader}>
+        <View>
+          <Image source={IconBack} />
+          <Text>Login</Text>
+        </View>
+        <Image />
+        <Image />
       <View>
         <Text>Novo produto</Text>
         {/* <Image/> */}
