@@ -14,8 +14,11 @@ export const CrudProdutos = () => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, []);
 
+  
+
   return (
     <View>
+
       <View style={styles.containerHeader}>
         <View>
           <Image source={IconBack} />
@@ -23,7 +26,6 @@ export const CrudProdutos = () => {
         </View>
         <Image />
         <Image />
-      </View>
       <View>
         <Text>Novo produto</Text>
         {/* <Image/> */}
