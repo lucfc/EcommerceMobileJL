@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {Text, View, TextInput, Image, ScrollView, FlatList} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, TextInput, Image, ScrollView, FlatList } from 'react-native';
 
-import {styles} from './styles';
+import { styles } from './styles';
 import ProdutoService from './produtoService';
 
 import IconBack from '../../assets/icons/backArrow.png';
+import IconLogo from '../../assets/icons/logo.png';
+import IconDark from '../../assets/icons/darkMode.png';
 
 export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
@@ -14,28 +16,29 @@ export const CrudProdutos = () => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, []);
 
-  
+
 
   return (
     <View>
-
       <View style={styles.containerHeader}>
-        <View>
-          <Image source={IconBack} />
-          <Text>Login</Text>
+        <View style={styles.containerHeaderBack}>
+          <Image source={IconBack} style={styles.back} />
+          <Text style={styles.headerText}>Entrar</Text>
         </View>
-        <Image />
-        <Image />
+        <View style={styles.containerHeaderImageLogo}>
+          <Image source={IconLogo} style={styles.logo} />
+        </View>
+        <View style={styles.containerHeaderImageMode}>
+          <Image source={IconDark} style={styles.switchModeDarkLight} />
+        </View>
+      </View>
       <View>
-        <Text>Novo produto</Text>
-        {/* <Image/> */}
+        <Text style={styles.novoProduto}>Novo produto +</Text>
       </View>
       <View>
         <TextInput style={styles.inputSearch}></TextInput>
       </View>
-      <FlatList
-        data={produtos}
-        renderItem={({item}) => (
+      <FlatList data={produtos} keyExtractor={item => item.id} renderItem={({ item }) => (
           <ScrollView>
             <View>
               <Text>{item.id}</Text>
@@ -43,8 +46,8 @@ export const CrudProdutos = () => {
             </View>
             <View>
               <Image
-                style={{width: 50, height: 50}}
-                source={{uri: item.fotoLink}}
+                style={{ width: 50, height: 50 }}
+                source={{ uri: item.fotoLink }}
               />
               <View>
                 <Text>{item.descricao}</Text>
@@ -58,7 +61,7 @@ export const CrudProdutos = () => {
             </View>
           </ScrollView>
         )}
-        keyExtractor={item => item.id}></FlatList>
+        ></FlatList>
     </View>
   );
 };
