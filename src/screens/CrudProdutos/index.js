@@ -17,7 +17,7 @@ export const CrudProdutos = () => {
   return (
     <View>
       <View>
-        <Image source={IconBack} />
+        <Image source={IconBack} /> 
         <Text>Login</Text>
       </View>
       <View>
