@@ -16,9 +16,13 @@ export const CrudProdutos = () => {
 
   return (
     <View>
-      <View>
-        <Image source={IconBack} />
-        <Text>Login</Text>
+      <View style={styles.containerHeader}>
+        <View>
+          <Image source={IconBack} />
+          <Text>Login</Text>
+        </View>
+        <Image />
+        <Image />
       </View>
       <View>
         <Text>Novo produto</Text>
