@@ -14,6 +14,8 @@ export const CrudProdutos = () => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, []);
 
+  
+
   return (
     <View>
       <View>
