@@ -1,12 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  Text,
+  View,
+  TextInput,
+  Image,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 
-import { styles } from './styles';
+import {styles} from './styles';
 import ProdutoService from './produtoService';
 
 import IconBack from '../../assets/icons/backArrow.png';
 import IconLogo from '../../assets/icons/logo.png';
 import IconDark from '../../assets/icons/darkMode.png';
+import IconSearch from '../../assets/icons/search.png';
+import IconEdit from '../../assets/icons/edit.png';
+import IconTrash from '../../assets/icons/trash.png';
+import IconLabel from '../../assets/icons/label.png';
 
 export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
@@ -16,11 +28,8 @@ export const CrudProdutos = () => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, []);
 
-
-
   return (
     <View style={styles.container}>
-
       <View style={styles.containerHeader}>
         <View style={styles.containerHeaderBack}>
           <Image source={IconBack} style={styles.back} />
@@ -35,13 +44,19 @@ export const CrudProdutos = () => {
       </View>
 
       <View>
-        <TouchableOpacity><Text style={styles.novoProduto}>Novo produto +</Text></TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.novoProduto}>Novo produto +</Text>
+        </TouchableOpacity>
       </View>
-      <View>
-        <TextInput style={styles.inputSearch}></TextInput>
+      <View style={styles.searchBar}>
+        <TextInput style={styles.inputSearch} />
+        <Image source={IconSearch} style={styles.ImgSearch} />
       </View>
 
-      <FlatList data={produtos} keyExtractor={item => item.id} renderItem={({ item }) => (
+      <FlatList
+        data={produtos}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => (
           <ScrollView style={styles.item}>
             <View style={styles.headerProduct}>
               <Text style={styles.nome}>{item.nome}</Text>
@@ -49,21 +64,24 @@ export const CrudProdutos = () => {
             </View>
             <View style={styles.bodyProduct}>
               <Image
-                style={{ width: 100, height: 100 }}
-                source={{ uri: item.fotoLink }}
+                style={{width: 100, height: 100}}
+                source={{uri: item.fotoLink}}
               />
               <View style={styles.bodyDescription}>
                 <Text>{item.descricao}</Text>
-                <Text>{item.nomeCategoria}</Text>
+                <Text> R$ {item.valor},00</Text>
+                <View style={styles.categoryLabel}>
+                  <Image source={IconLabel} />
+                  <Text>{item.nomeCategoria}</Text>
+                </View>
               </View>
-              <View>
-                <Image style={styles.crudButtons} source={require('../../assets/icons/edit.png')}></Image>
-                <Image style={styles.crudButtons} source={require('../../assets/icons/trash.png')}></Image>
+              <View style={styles.editIcons}>
+                <Image style={styles.crudButtons} source={IconEdit}></Image>
+                <Image style={styles.crudButtons} source={IconTrash}></Image>
               </View>
             </View>
           </ScrollView>
-        )}
-        ></FlatList>
+        )}></FlatList>
     </View>
   );
 };
