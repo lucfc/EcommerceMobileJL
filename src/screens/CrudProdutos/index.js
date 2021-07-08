@@ -10,6 +10,8 @@ export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
   const produtoService = new ProdutoService();
 
+
+  
   useEffect(() => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, []);
