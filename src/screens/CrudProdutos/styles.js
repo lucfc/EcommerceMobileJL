@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {RotationGestureHandler} from 'react-native-gesture-handler';
 
 export const styles = StyleSheet.create({
   container: {

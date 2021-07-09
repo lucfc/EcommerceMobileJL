@@ -7,15 +7,16 @@ export default class produtoService {
     }
 
     postProdutos(produto) {
-        return api.post('/produto', produto).then(res => res.data);
+        console.log("entrou aqui");
+        return api.post('produto', produto).then(res => res.data);
     }
 
     deleteProdutos(id) {
-        return api.delete(`/produto/${id}`).then(res => res.data)
+        return api.delete(`produto/${id}`).then(res => res.data)
     }
 
     putProdutos(produto) {
-        return api.put(`/produto/${produto.id}`, produto).then(res => res.data)
+        return api.put(`produto/${produto.id}`, produto).then(res => res.data)
     }
 
 }

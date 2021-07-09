@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
   View,
@@ -11,6 +11,7 @@ import {
 
 import {styles} from './styles';
 import ProdutoService from './produtoService';
+import { NewProductModal } from '../../components/Modals/NewProductModal';
 
 import IconBack from '../../assets/icons/backArrow.png';
 import IconLogo from '../../assets/icons/logo.png';
@@ -23,15 +24,20 @@ import IconLabel from '../../assets/icons/label.png';
 export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
   const produtoService = new ProdutoService();
+  
+  const modalizeRef = useRef(null);
 
   useEffect(() => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, [produtos]);
 
   const deleteProduto = async id => {
-    console.log(id);
     await produtoService.deleteProdutos(id);
   };
+
+  const openNewProductModal = () => {
+    modalizeRef.current?.open();
+  }
 
   return (
     <View style={styles.container}>
@@ -50,7 +56,7 @@ export const CrudProdutos = () => {
 
       <View>
         <TouchableOpacity>
-          <Text style={styles.novoProduto}>Novo produto +</Text>
+          <Text onPress={() => openNewProductModal()} style={styles.novoProduto}>Novo produto +</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.searchBar}>
@@ -102,6 +108,7 @@ export const CrudProdutos = () => {
             </View>
           </ScrollView>
         )}></FlatList>
+    <NewProductModal modalizeRef={modalizeRef}/>
     </View>
   );
 };
