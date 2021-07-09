@@ -4,6 +4,7 @@ import {RotationGestureHandler} from 'react-native-gesture-handler';
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    fontFamily: 'Montserrat-Regular',
   },
   searchBar: {
     backgroundColor: '#e9e9e9',
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     marginTop: 26,
     marginHorizontal: 10,
     height: 27.79,
-    maxWidth:'94%'
+    maxWidth: '94%',
   },
   inputSearch: {
     borderRadius: 5,
@@ -28,7 +29,7 @@ export const styles = StyleSheet.create({
     height: 27.41,
     width: 27.41,
     backgroundColor: '#e9e9e9',
-    tintColor:'black'
+    tintColor: 'black',
   },
   containerHeader: {
     marginVertical: 10,
@@ -61,7 +62,7 @@ export const styles = StyleSheet.create({
   logo: {
     width: 46,
     height: 33,
-    resizeMode:'contain',
+    resizeMode: 'contain',
   },
   switchModeDarkLight: {
     width: 30,
@@ -70,16 +71,18 @@ export const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 15,
-    color:'black'
+    color: 'black',
+    fontFamily: 'Montserrat-Regular',
   },
   novoProduto: {
-    fontSize: 18,
+    fontSize: 20,
     width: '100%',
     textAlign: 'right',
     paddingHorizontal: 16,
     marginTop: 10,
-    fontWeight: 'bold',
-    marginBottom:0
+    // fontWeight: 'bold',
+    marginBottom: 0,
+    fontFamily: 'Montserrat-SemiBold',
   },
   item: {
     marginLeft: 12,
@@ -91,7 +94,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 30,
     paddingTop: 15,
-    height:100
+    height: 100,
   },
   bodyDescription: {
     flex: 1,
@@ -105,8 +108,9 @@ export const styles = StyleSheet.create({
     marginRight: 15,
   },
   nome: {
-    fontSize: 19.04,
-    fontWeight: 'bold',
+    fontSize: 18,
+    // fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
   },
   id: {
     alignSelf: 'center',
@@ -120,8 +124,8 @@ export const styles = StyleSheet.create({
   editIcons: {
     justifyContent: 'space-around',
   },
-  valor:{
-    fontWeight:'bold',
-    fontSize:15
-  }
+  valor: {
+    // fontWeight: 'bold',
+    fontSize: 15,
+  },
 });
