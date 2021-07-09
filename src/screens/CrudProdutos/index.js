@@ -26,7 +26,12 @@ export const CrudProdutos = () => {
 
   useEffect(() => {
     produtoService.getProdutos().then(data => setProdutos(data));
-  }, []);
+  }, [produtos]);
+  
+  const deleteProduto = async (id) => {
+    console.log(id);
+    await produtoService.deleteProdutos(id)
+  }
 
   return (
     <View style={styles.container}>
@@ -35,9 +40,9 @@ export const CrudProdutos = () => {
           <Image source={IconBack} style={styles.back} />
           <Text style={styles.headerText}>Entrar</Text>
         </View>
-        <View style={styles.containerHeaderImageLogo}>
+        <TouchableOpacity style={styles.containerHeaderImageLogo}>
           <Image source={IconLogo} style={styles.logo} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.containerHeaderImageMode}>
           <Image source={IconDark} style={styles.switchModeDarkLight} />
         </View>
@@ -50,12 +55,14 @@ export const CrudProdutos = () => {
       </View>
       <View style={styles.searchBar}>
         <TextInput style={styles.inputSearch} />
-        <Image source={IconSearch} style={styles.ImgSearch} />
+        <TouchableOpacity>
+          <Image source={IconSearch} style={styles.ImgSearch} />
+        </TouchableOpacity>
       </View>
 
       <FlatList
         data={produtos}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id} contentContainerStyle={{ paddingBottom: 150 }}
         renderItem={({item}) => (
           <ScrollView style={styles.item}>
             <View style={styles.headerProduct}>
@@ -64,20 +71,24 @@ export const CrudProdutos = () => {
             </View>
             <View style={styles.bodyProduct}>
               <Image
-                style={{width: 100, height: 100}}
+                style={{width: 75, height: 75}}
                 source={{uri: item.fotoLink}}
               />
               <View style={styles.bodyDescription}>
                 <Text>{item.descricao}</Text>
-                <Text> R$ {item.valor},00</Text>
+                <Text style={styles.valor}>R$ {item.valor.toFixed(2)}</Text>
                 <View style={styles.categoryLabel}>
                   <Image source={IconLabel} />
-                  <Text>{item.nomeCategoria}</Text>
+                  <Text>  {item.nomeCategoria}</Text>
                 </View>
               </View>
               <View style={styles.editIcons}>
-                <Image style={styles.crudButtons} source={IconEdit}></Image>
-                <Image style={styles.crudButtons} source={IconTrash}></Image>
+                <TouchableOpacity>
+                  <Image style={[styles.crudButtons, {marginBottom:15}]} source={IconEdit}></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => deleteProduto(item.id)}>
+                  <Image style={styles.crudButtons} source={IconTrash}></Image>
+                </TouchableOpacity>
               </View>
             </View>
           </ScrollView>

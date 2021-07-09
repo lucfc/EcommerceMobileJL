@@ -10,28 +10,29 @@ export const styles = StyleSheet.create({
     borderRadius: 3.81,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 50,
-    marginTop: 30,
+    marginBottom: 18,
+    marginTop: 26,
     marginHorizontal: 10,
     height: 27.79,
+    maxWidth:'94%'
   },
-
   inputSearch: {
     borderRadius: 5,
     color: 'black',
     marginHorizontal: '2%',
-    width: 360,
+    width: '90%',
     height: 40,
     fontSize: 15,
   },
   ImgSearch: {
-    height: 21.32,
-    width: 22.84,
+    height: 27.41,
+    width: 27.41,
     backgroundColor: '#e9e9e9',
+    tintColor:'black'
   },
   containerHeader: {
     marginVertical: 10,
-    height: 40,
+    height: 35,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 5,
@@ -58,9 +59,9 @@ export const styles = StyleSheet.create({
     height: 30,
   },
   logo: {
-    width: 40,
-    height: 31,
-    resizeMode: 'contain',
+    width: 46,
+    height: 33,
+    resizeMode:'contain',
   },
   switchModeDarkLight: {
     width: 30,
@@ -69,15 +70,16 @@ export const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 15,
+    color:'black'
   },
   novoProduto: {
     fontSize: 18,
     width: '100%',
     textAlign: 'right',
     paddingHorizontal: 16,
-    marginBottom: 10,
     marginTop: 10,
     fontWeight: 'bold',
+    marginBottom:0
   },
   item: {
     marginLeft: 12,
@@ -89,6 +91,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 30,
     paddingTop: 15,
+    height:100
   },
   bodyDescription: {
     flex: 1,
@@ -117,4 +120,8 @@ export const styles = StyleSheet.create({
   editIcons: {
     justifyContent: 'space-around',
   },
+  valor:{
+    fontWeight:'bold',
+    fontSize:15
+  }
 });
