@@ -12,6 +12,7 @@ import {
 import {styles} from './styles';
 import ProdutoService from './produtoService';
 import { NewProductModal } from '../../components/Modals/NewProductModal';
+import { UpdateProductModal } from '../../components/Modals/UpdateProductModal';
 
 import IconBack from '../../assets/icons/backArrow.png';
 import IconLogo from '../../assets/icons/logo.png';
@@ -23,11 +24,20 @@ import IconLabel from '../../assets/icons/label.png';
 
 export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
+  const [produtoUpdate, setProdutoUpdate] = useState({
+    descricao: '',
+    idCategoria: 0,
+    idFuncionario: 0,
+    nome: '',
+    qtdEstoque: 0,
+    valor: 0
+});
   const produtoService = new ProdutoService();
 
   const [reload, setReload] = useState(false);
   
-  const modalizeRef = useRef(null);
+  const modalizeRef1 = useRef(null);
+  const modalizeRef2 = useRef(null);
  
   console.log("Entrou");
 
@@ -42,7 +52,12 @@ export const CrudProdutos = () => {
   };
 
   const openNewProductModal = () => {
-    modalizeRef.current?.open();
+    modalizeRef1.current?.open();
+  }
+
+  const openUpdateProductModal = (data) => {
+    setProdutoUpdate(data)
+    modalizeRef2.current?.open();
   }
 
   return (
@@ -102,7 +117,7 @@ export const CrudProdutos = () => {
                 </View>
               </View>
               <View style={styles.editIcons}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => openUpdateProductModal(item)}>
                   <Image
                     style={[styles.crudButtons, {marginBottom: 15}]}
                     source={IconEdit}></Image>
@@ -114,7 +129,8 @@ export const CrudProdutos = () => {
             </View>
           </ScrollView>
         )}></FlatList>
-    <NewProductModal modalizeRef={modalizeRef} reload={reload} setReload={setReload}/>
+    <NewProductModal modalizeRef1={modalizeRef1} reload={reload} setReload={setReload}/>
+    <UpdateProductModal modalizeRef2={modalizeRef2} reload={reload} setReload={setReload} produtoUpdate={produtoUpdate} />
     </View>
   );
 };
