@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextInput, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { TextInput, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import { styles } from './styles'
@@ -8,7 +8,7 @@ import ProdutoService from '../../../screens/CrudProdutos/produtoService';
 import exit from '../../../assets/icons/exit.png';
 import confirm from '../../../assets/icons/confirm.png';
 
-export const NewProductModal = ({ modalizeRef }) => {
+export const NewProductModal = ({ modalizeRef, reload, setReload }) => {
 
     const [nome, setName] = useState('')
     const [descricao, setDescricao] = useState('')
@@ -18,15 +18,17 @@ export const NewProductModal = ({ modalizeRef }) => {
     const [valor, setValor] = useState(0)
     const [colorBollean, setColorBollean] = useState(true)
 
+    console.log("Entrou aqui");
+
     const produtoService = new ProdutoService();
 
-    useEffect (()=>{
-        if(nome !== '' && descricao !== '' && idCategoria !== 0 && idFuncionario !== 0 && qtdEstoque !== 0 && valor !== 0){
+    useEffect(() => {
+        if (nome !== '' && descricao !== '' && idCategoria !== 0 && idFuncionario !== 0 && qtdEstoque !== 0 && valor !== 0) {
             setColorBollean(false)
-        }else{
+        } else {
             setColorBollean(true)
         }
-    },[nome, descricao, idCategoria, idFuncionario,qtdEstoque,valor])
+    }, [nome, descricao, idCategoria, idFuncionario, qtdEstoque, valor])
 
     const produto = {
         descricao: descricao,
@@ -38,16 +40,26 @@ export const NewProductModal = ({ modalizeRef }) => {
     }
 
     const handleCloseModal = () => {
+        setName('')
+        setDescricao('')
+        setCategoria(0)
+        setFuncionario(0)
+        setQtdEstoque(0)
+        setValor(0)
+        setColorBollean(true)
         modalizeRef.current.close();
     }
-    const saveProductsAndClose = async() => {
-        await produtoService.postProdutos(produto);
-        handleCloseModal();
+
+    const saveProductsAndClose = () => {
+        produtoService.postProdutos(produto).then(res => {
+            handleCloseModal()
+            setReload(!reload)
+        }).catch(e => { console.log(e) })
     }
-     
+
     return (
         <Modalize ref={modalizeRef}
-            keyboardAvoidingBehavior={'height'}
+            closeOnOverlayTap={true}
             modalHeight={800}
             handlePosition='inside'
             handleStyle={{ backgroundColor: 'transparent' }}
@@ -57,43 +69,43 @@ export const NewProductModal = ({ modalizeRef }) => {
                 borderTopRightRadius: 5,
 
             }}>
-                <View style={styles.containerGeral}>
-                    <TouchableOpacity style={styles.containerExit} onPress={() => handleCloseModal()}>
-                        <Image style={styles.exitImage} source={exit} />
-                    </TouchableOpacity>
-                    <View style={styles.containerName}>
-                        <Text style={styles.text}>Nome</Text>
-                        <TextInput style={styles.inputName} onChangeText={(value) => setName(value)}></TextInput>
-                    </View>
-                    <View style={styles.containerDescription}>
-                        <Text style={styles.text}>Descrição</Text>
-                        <TextInput style={styles.inputDescription} onChangeText={(value) => setDescricao(value)}></TextInput>
-                    </View>
-                    <View style={styles.containerTwoItems}>
-                        <View style={styles.containerItem}>
-                            <Text style={styles.text}>Qtd. de estoque</Text>
-                            <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setQtdEstoque(value)}></TextInput>
-                        </View>
-                        <View style={styles.containerItem}>
-                            <Text style={styles.text}>IdCategoria</Text>
-                            <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setCategoria(value)}></TextInput>
-                        </View>
-                    </View>
-                    <View style={styles.containerTwoItems}>
-                        <View style={styles.containerItem}>
-                            <Text style={styles.text}>Valor</Text>
-                            <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setValor(value)}></TextInput>
-                        </View>
-                        <View style={styles.containerItem}>
-                            <Text style={styles.text}>IdFuncionário</Text>
-                            <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
-                        </View>
-                    </View>
-                    <TouchableOpacity disabled={colorBollean} onPress={()=> saveProductsAndClose()} style={styles.containerConfirm}>
-                        <Image source={confirm} style={{tintColor: colorBollean ? '#535353' : '#4BBE23' }}/>
-                        <Text style={styles.text}>Salvar</Text>
-                    </TouchableOpacity>
+            <View style={styles.containerGeral}>
+                <TouchableOpacity style={styles.containerExit} onPress={() => handleCloseModal()}>
+                    <Image style={styles.exitImage} source={exit} />
+                </TouchableOpacity>
+                <View style={styles.containerName}>
+                    <Text style={styles.text}>Nome</Text>
+                    <TextInput style={styles.inputName} onChangeText={(value) => setName(value)}></TextInput>
                 </View>
+                <View style={styles.containerDescription}>
+                    <Text style={styles.text}>Descrição</Text>
+                    <TextInput style={styles.inputDescription} onChangeText={(value) => setDescricao(value)}></TextInput>
+                </View>
+                <View style={styles.containerTwoItems}>
+                    <View style={styles.containerItem}>
+                        <Text style={styles.text}>Qtd. de estoque</Text>
+                        <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setQtdEstoque(value)}></TextInput>
+                    </View>
+                    <View style={styles.containerItem}>
+                        <Text style={styles.text}>IdCategoria</Text>
+                        <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setCategoria(value)}></TextInput>
+                    </View>
+                </View>
+                <View style={styles.containerTwoItems}>
+                    <View style={styles.containerItem}>
+                        <Text style={styles.text}>Valor</Text>
+                        <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setValor(value)}></TextInput>
+                    </View>
+                    <View style={styles.containerItem}>
+                        <Text style={styles.text}>IdFuncionário</Text>
+                        <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
+                    </View>
+                </View>
+                <TouchableOpacity disabled={colorBollean} onPress={() => saveProductsAndClose()} style={styles.containerConfirm}>
+                    <Image source={confirm} style={{ tintColor: colorBollean ? '#535353' : '#4BBE23' }} />
+                    <Text style={styles.text}>Salvar</Text>
+                </TouchableOpacity>
+            </View>
         </Modalize>
     )
 }

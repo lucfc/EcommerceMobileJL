@@ -24,15 +24,21 @@ import IconLabel from '../../assets/icons/label.png';
 export const CrudProdutos = () => {
   const [produtos, setProdutos] = useState([]);
   const produtoService = new ProdutoService();
+
+  const [reload, setReload] = useState(false);
   
   const modalizeRef = useRef(null);
+ 
+  console.log("Entrou");
 
   useEffect(() => {
     produtoService.getProdutos().then(data => setProdutos(data));
-  }, [produtos]);
+  }, [reload]);
 
-  const deleteProduto = async id => {
-    await produtoService.deleteProdutos(id);
+  const deleteProduto = id => {
+    produtoService.deleteProdutos(id).then(()=>{
+      setReload(!reload)
+    })
   };
 
   const openNewProductModal = () => {
@@ -108,7 +114,7 @@ export const CrudProdutos = () => {
             </View>
           </ScrollView>
         )}></FlatList>
-    <NewProductModal modalizeRef={modalizeRef}/>
+    <NewProductModal modalizeRef={modalizeRef} reload={reload} setReload={setReload}/>
     </View>
   );
 };
