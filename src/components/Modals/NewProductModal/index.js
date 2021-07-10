@@ -99,9 +99,9 @@ export const NewProductModal = ({ modalizeRef1, reload, setReload }) => {
                         <TextInput style={styles.inputItems} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
                     </View>
                 </View>
-                <TouchableOpacity disabled={!colorBoolean} onPress={() => saveProductsAndClose()} style={styles.containerConfirm}>
-                    <Image source={confirm} style={{ tintColor: colorBoolean ? '#4BBE23' : '#535353' }} />
-                    <Text style={styles.text}>Salvar</Text>
+                <TouchableOpacity disabled={colorBoolean} onPress={() => saveProductsAndClose()} style={[styles.containerConfirm, {borderColor: !colorBoolean ? '#4BBE23' : '#535353'}]}>
+                    <Text style={[styles.text,{color: !colorBoolean ? '#4BBE23' : '#636363'}]}>Salvar</Text>
+                    <Image source={confirm} style={{width: 30,height:30, tintColor: !colorBoolean ? '#4BBE23' : '#636363' }} />
                 </TouchableOpacity>
             </View>
         </Modalize>

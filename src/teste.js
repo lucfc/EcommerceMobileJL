@@ -3,12 +3,12 @@ import { TextInput, Text, View, Image, TouchableOpacity, KeyboardAvoidingView } 
 import { Modalize } from 'react-native-modalize';
 
 import { styles } from './styles'
-import ProdutoService from '../../../screens/CrudProdutos/produtoService';
+import ProdutoService from './screens/CrudProdutos/produtoService';
 
-import exit from '../../../assets/icons/exit.png';
-import confirm from '../../../assets/icons/confirm.png';
+import exit from './assets/icons/exit.png';
+import confirm from './assets/icons/confirm.png';
 
-export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpdate }) => {
+export const Teste = ({ modalizeRef2, reload, setReload, produtoUpdate }) => {
 
     const [nome, setNome] = useState(produtoUpdate.nome)
     const [descricao, setDescricao] = useState(produtoUpdate.descricao)
@@ -72,16 +72,6 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
     }
 
     return (
-        <Modalize ref={modalizeRef2}
-            closeOnOverlayTap={true}
-            modalHeight={800}
-            handlePosition='inside'
-            handleStyle={{ backgroundColor: 'transparent' }}
-            modalStyle={{
-                backgroundColor: '#fff',
-                borderTopLeftRadius: 5,
-                borderTopRightRadius: 5,
-            }}>
             <KeyboardAvoidingView behavior='padding'>
                 <View style={styles.containerGeral}>
                     <TouchableOpacity style={styles.containerExit} onPress={() => handleCloseModal()}>
@@ -121,6 +111,5 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
-        </Modalize>
     )
 }

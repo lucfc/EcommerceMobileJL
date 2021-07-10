@@ -36,7 +36,12 @@ export const styles = StyleSheet.create({
     },
     containerConfirm:{
         marginTop:30,
-        alignItems:'center'
+        flexDirection:'row',
+        alignItems:'center',
+        borderWidth:1,
+        borderColor: '#626262',
+        borderRadius:5,
+        padding:10
     },
     inputName:{
         width: '100%',
@@ -64,7 +69,5 @@ export const styles = StyleSheet.create({
         width:30,
         resizeMode:'contain'
     },
-    confirmImage:{
 
-    }
 })
