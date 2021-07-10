@@ -1,18 +1,20 @@
 import React from 'react';
-import { Home } from '../screens/Home'
-import { Login } from '../screens/Login'
+import { createStackNavigator } from '@react-navigation/stack';
+import { TelaLogin } from '../screens/TelaLogin'
 import { CrudProdutos } from '../screens/CrudProdutos'
-import { ModeProvider } from '../Contexts/ContextDarkLight';
+import { ola } from '../screens/Home';
 
+
+
+const AppStack = createStackNavigator();
 export const Routes = () => {
   return (
-    <AppStack.Navigator
-      screenOptions={{ headerTransparent: true, headerShown: false }}
-    >
-        <AppStack.Screen name="Welcome" component={Welcome} />
-        <AppStack.Screen name="Login" component={Login} />
-        <AppStack.Screen name="Home" component={Home} />
-        <AppStack.Screen name="CrudProdutos" component={CrudProdutos} />
+    <AppStack.Navigator screenOptions={{ headerTransparent: true, headerShown: false }} >
+
+      <AppStack.Screen name="TelaLogin" component={TelaLogin} />
+      <AppStack.Screen name="CrudProdutos" component={CrudProdutos} />
+      <AppStack.Screen name="OIE" component={ola} />
+
     </AppStack.Navigator>
   );
 }

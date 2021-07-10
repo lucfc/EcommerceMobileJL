@@ -6,7 +6,12 @@ import { Styles } from './styles';
 import ImgLogo from '../../assets/icons/logo.png';
 import IconDarkMode from '../../assets/icons/darkMode.png';
 
+import { useNavigation } from '@react-navigation/native';
+
 export const TelaLogin = () => {
+
+    const navigation = useNavigation();
+
     return (
 
         <View style={Styles.container}>
@@ -29,7 +34,7 @@ export const TelaLogin = () => {
 
             <View>
 
-                <TouchableOpacity style={Styles.BotaoEntrar}>
+                <TouchableOpacity style={Styles.BotaoEntrar} onPress={() => navigation.navigate('OIE')}>
                     <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
                 </TouchableOpacity>
 
