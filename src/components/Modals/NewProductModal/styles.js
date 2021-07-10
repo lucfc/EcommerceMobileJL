@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
     containerGeral:{
         alignItems:'center',
-        height:800
+        height:800,
     },
     containerExit:{
         alignSelf: 'flex-end',

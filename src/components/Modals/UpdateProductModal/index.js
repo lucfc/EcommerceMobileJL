@@ -5,10 +5,10 @@ import { Modalize } from 'react-native-modalize';
 import { styles } from './styles'
 import ProdutoService from '../../../screens/CrudProdutos/produtoService';
 
-import exit from '../../../assets/icons/exit.png';
-import confirm from '../../../assets/icons/confirm.png';
+import iconExit from '../../../assets/icons/exit.png';
+import iconConfirm from '../../../assets/icons/confirm.png';
 
-export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpdate }) => {
+export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpdate, modeBoolean }) => {
 
     const [nome, setNome] = useState(produtoUpdate.nome)
     const [descricao, setDescricao] = useState(produtoUpdate.descricao)
@@ -78,46 +78,46 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
             handlePosition='inside'
             handleStyle={{ backgroundColor: 'transparent' }}
             modalStyle={{
-                backgroundColor: '#fff',
+                backgroundColor: !modeBoolean ? '#fff': 'black',
                 borderTopLeftRadius: 5,
                 borderTopRightRadius: 5,
             }}>
             <KeyboardAvoidingView behavior='padding'>
                 <View style={styles.containerGeral}>
                     <TouchableOpacity style={styles.containerExit} onPress={() => handleCloseModal()}>
-                        <Image style={styles.exitImage} source={exit} />
+                        <Image style={[styles.exitImage,{tintColor: modeBoolean ? '#fff': 'black'}]} source={iconExit} />
                     </TouchableOpacity>
                     <View style={styles.containerName}>
-                        <Text style={styles.text}>Nome</Text>
-                        <TextInput style={styles.inputName} defaultValue={produtoUpdate.nome} onChangeText={(data) => setNome(data)}></TextInput>
+                        <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Nome</Text>
+                        <TextInput style={[styles.inputName, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.nome} onChangeText={(data) => setNome(data)}></TextInput>
                     </View>
                     <View style={styles.containerDescription}>
-                        <Text style={styles.text}>Descrição</Text>
-                        <TextInput style={styles.inputDescription} defaultValue={produtoUpdate.descricao} onChangeText={(data) => setDescricao(data)}></TextInput>
+                        <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Descrição</Text>
+                        <TextInput style={[styles.inputDescription, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.descricao} onChangeText={(data) => setDescricao(data)}></TextInput>
                     </View>
                     <View style={styles.containerTwoItems}>
                         <View style={styles.containerItem}>
-                            <Text style={styles.text}>Qtd. de estoque</Text>
-                            <TextInput style={styles.inputItems} defaultValue={produtoUpdate.qtdEstoque.toString()} keyboardType={'numeric'} onChange={(data) => setQtdEstoque(data)}></TextInput>
+                            <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Qtd. de estoque</Text>
+                            <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.qtdEstoque.toString()} keyboardType={'numeric'} onChange={(data) => setQtdEstoque(data)}></TextInput>
                         </View>
                         <View style={styles.containerItem}>
-                            <Text style={styles.text}>IdCategoria</Text>
-                            <TextInput style={styles.inputItems} defaultValue={produtoUpdate.idCategoria.toString()} keyboardType={'numeric'} onChange={(data) => setCategoria(data)}></TextInput>
+                            <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>IdCategoria</Text>
+                            <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.idCategoria.toString()} keyboardType={'numeric'} onChange={(data) => setCategoria(data)}></TextInput>
                         </View>
                     </View>
                     <View style={styles.containerTwoItems}>
                         <View style={styles.containerItem}>
-                            <Text style={styles.text}>Valor</Text>
-                            <TextInput style={styles.inputItems} defaultValue={produtoUpdate.valor.toString()} keyboardType={'numeric'} onChangeText={(data) => setValor(data)}></TextInput>
+                            <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Valor</Text>
+                            <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.valor.toString()} keyboardType={'numeric'} onChangeText={(data) => setValor(data)}></TextInput>
                         </View>
                         <View style={styles.containerItem}>
-                            <Text style={styles.text}>IdFuncionário</Text>
-                            <TextInput style={styles.inputItems} defaultValue={produtoUpdate.idFuncionario.toString()} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
+                            <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>IdFuncionário</Text>
+                            <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} defaultValue={produtoUpdate.idFuncionario.toString()} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
                         </View>
                     </View>
                     <TouchableOpacity disabled={!colorBoolean} onPress={() => updateProductsAndClose()} style={[styles.containerConfirm, { borderColor: colorBoolean ? '#4BBE23' : '#535353' }]}>
                         <Text style={[styles.text, { color: colorBoolean ? '#4BBE23' : '#636363' }]}>Salvar</Text>
-                        <Image source={confirm} style={{ width: 30, height: 30, tintColor: colorBoolean ? '#4BBE23' : '#636363' }} />
+                        <Image source={iconConfirm} style={{ width: 30, height: 30, tintColor: colorBoolean ? '#4BBE23' : '#636363' }} />
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>

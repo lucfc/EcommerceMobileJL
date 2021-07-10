@@ -1,22 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  Image,
-  ScrollView,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { Text, View, TextInput, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
-import {styles} from './styles';
+import { styles } from './styles';
 import ProdutoService from './produtoService';
 import { NewProductModal } from '../../components/Modals/NewProductModal';
 import { UpdateProductModal } from '../../components/Modals/UpdateProductModal';
+import { DeleteProductModal } from '../../components/Modals/DeleteProductModal';
+import { ModeContext } from '../../contexts/ContextDarkLight';
 
 import IconBack from '../../assets/icons/backArrow.png';
 import IconLogo from '../../assets/icons/logo.png';
 import IconDark from '../../assets/icons/darkMode.png';
+import IconLight from '../../assets/icons/lightMode.png';
 import IconSearch from '../../assets/icons/search.png';
 import IconEdit from '../../assets/icons/edit.png';
 import IconTrash from '../../assets/icons/trash.png';
@@ -31,25 +26,23 @@ export const CrudProdutos = () => {
     nome: '',
     qtdEstoque: 0,
     valor: 0
-});
+  });
+  const [produtoDelete, setProdutoDelete] = useState({
+    nome: '',
+  });
   const produtoService = new ProdutoService();
 
+  const { modeBoolean, setModeBoolean } = useContext(ModeContext);
+
   const [reload, setReload] = useState(false);
-  
+
   const modalizeRef1 = useRef(null);
   const modalizeRef2 = useRef(null);
- 
-  console.log("Entrou");
+  const modalizeRef3 = useRef(null);
 
   useEffect(() => {
     produtoService.getProdutos().then(data => setProdutos(data));
   }, [reload]);
-
-  const deleteProduto = id => {
-    produtoService.deleteProdutos(id).then(()=>{
-      setReload(!reload)
-    })
-  };
 
   const openNewProductModal = () => {
     modalizeRef1.current?.open();
@@ -59,58 +52,66 @@ export const CrudProdutos = () => {
     setProdutoUpdate(data)
     modalizeRef2.current?.open();
   }
+  const openDeleteProductModal = (data) => {
+    setProdutoDelete(data)
+    modalizeRef3.current?.open();
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerHeader}>
+    <View style={[styles.container,{backgroundColor: modeBoolean ? 'black' : 'white'}]}>
+      <View style={[styles.containerHeader,{borderColor: modeBoolean ? '#fff': 'black'}]}>
         <View style={styles.containerHeaderBack}>
-          <Image source={IconBack} style={styles.back} />
-          <Text style={styles.headerText}>Entrar</Text>
+          <Image source={IconBack} style={[styles.back,{tintColor: modeBoolean ? '#fff': 'black'}]} />
+          <Text style={[styles.headerText,{color: modeBoolean ? '#fff': 'black'}]}>Entrar</Text>
         </View>
-        <TouchableOpacity style={styles.containerHeaderImageLogo}>
-          <Image source={IconLogo} style={styles.logo} />
-        </TouchableOpacity>
+        <View style={styles.containerHeaderImageLogo}>
+          <TouchableOpacity>
+            <Image source={IconLogo} style={[styles.logo,{tintColor: modeBoolean ? '#fff': 'black'}]} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.containerHeaderImageMode}>
-          <Image source={IconDark} style={styles.switchModeDarkLight} />
+          <TouchableOpacity onPress={()=>setModeBoolean(!modeBoolean)}>
+            <Image source={modeBoolean ? IconLight : IconDark} style={styles.switchModeDarkLight} />
+          </TouchableOpacity>
         </View>
       </View>
 
       <View>
         <TouchableOpacity>
-          <Text onPress={() => openNewProductModal()} style={styles.novoProduto}>Novo produto +</Text>
+          <Text onPress={() => openNewProductModal()} style={[styles.novoProduto,{color: modeBoolean ? '#fff': 'black'}]}>Novo produto +</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.searchBar}>
+      <View style={[styles.searchBar, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]}>
         <TextInput style={styles.inputSearch} />
         <TouchableOpacity>
-          <Image source={IconSearch} style={styles.ImgSearch} />
+          <Image source={IconSearch} style={[styles.ImgSearch, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} />
         </TouchableOpacity>
       </View>
 
       <FlatList
         data={produtos}
         keyExtractor={item => item.id}
-        contentContainerStyle={{paddingBottom: 150}}
-        renderItem={({item}) => (
+        contentContainerStyle={{ paddingBottom: 150 }}
+        renderItem={({ item }) => (
           <ScrollView style={styles.item}>
             <View style={styles.headerProduct}>
-              <Text style={styles.nome}>{item.nome}</Text>
+              <Text style={[styles.nome,{color: modeBoolean ? '#fff': 'black'}]}>{item.nome}</Text>
               <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
             </View>
             <View style={styles.bodyProduct}>
               <Image
-                style={{width: 75, height: 75}}
-                source={{uri: item.fotoLink}}
+                style={{ width: 75, height: 75 }}
+                source={{ uri: item.fotoLink }}
               />
               <View style={styles.bodyDescription}>
-                <Text style={{fontFamily: 'Montserrat-Regular'}}>
+                <Text style={{ fontFamily: 'Montserrat-Regular',color: modeBoolean ? '#fff': 'black' }}>
                   {item.descricao}
                 </Text>
-                <Text style={styles.valor}>R$ {item.valor.toFixed(2)}</Text>
+                <Text style={[styles.valor,{color: modeBoolean ? '#fff': 'black'}]}>R$ {item.valor.toFixed(2)}</Text>
                 <View style={styles.categoryLabel}>
-                  <Image source={IconLabel} />
+                  <Image source={IconLabel} style={{tintColor: modeBoolean ? '#fff': 'black'}} />
                   <Text
-                    style={{fontFamily: 'Montserrat-Regular', fontSize: 12}}>
+                    style={{ fontFamily: 'Montserrat-Regular', fontSize: 12, color: modeBoolean ? '#fff': 'black' }}>
                     {item.nomeCategoria.charAt(0).toUpperCase() +
                       item.nomeCategoria.slice(1).toLowerCase()}
                   </Text>
@@ -119,18 +120,19 @@ export const CrudProdutos = () => {
               <View style={styles.editIcons}>
                 <TouchableOpacity onPress={() => openUpdateProductModal(item)}>
                   <Image
-                    style={[styles.crudButtons, {marginBottom: 15}]}
+                    style={[styles.crudButtons, { marginBottom: 15,tintColor: modeBoolean ? '#fff': 'black' }]}
                     source={IconEdit}></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => deleteProduto(item.id)}>
-                  <Image style={styles.crudButtons} source={IconTrash}></Image>
+                <TouchableOpacity onPress={() => openDeleteProductModal(item)}>
+                  <Image style={[styles.crudButtons,{tintColor: modeBoolean ? '#fff': 'black'}]} source={IconTrash}></Image>
                 </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
         )}></FlatList>
-    <NewProductModal modalizeRef1={modalizeRef1} reload={reload} setReload={setReload}/>
-    <UpdateProductModal modalizeRef2={modalizeRef2} reload={reload} setReload={setReload} produtoUpdate={produtoUpdate} />
+      <NewProductModal modeBoolean={modeBoolean} modalizeRef1={modalizeRef1} reload={reload} setReload={setReload} />
+      <UpdateProductModal modeBoolean={modeBoolean} modalizeRef2={modalizeRef2} reload={reload} setReload={setReload} produtoUpdate={produtoUpdate} />
+      <DeleteProductModal modeBoolean={modeBoolean} modalizeRef3={modalizeRef3} reload={reload} setReload={setReload} produtoDelete={produtoDelete} />
     </View>
   );
 };

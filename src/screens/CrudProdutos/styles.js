@@ -1,12 +1,14 @@
-import {StyleSheet} from 'react-native';
+import React,{ useContext } from 'react';
+import {StyleSheet } from 'react-native';
+import { ModeContext } from '../../contexts/ContextDarkLight';
+
+const { modeBoolean, setModeBoolean } = useContext(ModeContext);
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     fontFamily: 'Montserrat-Regular',
   },
   searchBar: {
-    backgroundColor: '#e9e9e9',
     borderRadius: 3.81,
     flexDirection: 'row',
     alignItems: 'center',
@@ -27,7 +29,6 @@ export const styles = StyleSheet.create({
   ImgSearch: {
     height: 27.41,
     width: 27.41,
-    backgroundColor: '#e9e9e9',
     tintColor: 'black',
   },
   containerHeader: {
