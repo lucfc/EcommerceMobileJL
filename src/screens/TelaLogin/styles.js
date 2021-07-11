@@ -2,10 +2,8 @@ import {StyleSheet} from 'react-native';
 
 export const Styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     height: '100%',
     alignItems: 'center',
-    paddingTop: 20,
   },
 
   ImgLogo: {
@@ -17,7 +15,6 @@ export const Styles = StyleSheet.create({
     height: 35,
     width: 322,
     borderRadius: 4,
-    backgroundColor: 'grey',
     marginTop: 80,
     justifyContent: 'center',
   },

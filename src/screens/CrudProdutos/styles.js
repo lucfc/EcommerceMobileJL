@@ -7,7 +7,6 @@ const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 export const styles = StyleSheet.create({
   container: {
     fontFamily: 'Montserrat-Regular',
-    paddingTop: 20,
   },
   searchBar: {
     borderRadius: 3.81,

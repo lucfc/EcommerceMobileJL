@@ -9,11 +9,11 @@ import {ModeProvider} from './src/contexts/ContextDarkLight';
 const App = () => {
   return (
     <NavigationContainer>
-      <StatusBar
+      {/* <StatusBar
         backgroundColor="transparent"
         translucent
         barStyle="light-content"
-      />
+      /> */}
       <ModeProvider>
         <Routes />
       </ModeProvider>
