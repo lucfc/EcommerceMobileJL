@@ -23,7 +23,6 @@ export const TelaLogin = () => {
   const [senha, setSenha] = useState();
 
   const entrar = () => {
-    console.log(id);
     funcionarioService.getById(id).then(res=>{
       if (senha == res.nome){
         navigation.navigate('CrudProdutos')
