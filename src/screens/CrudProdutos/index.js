@@ -48,14 +48,11 @@ export const CrudProdutos = () => {
   const modalizeRef2 = useRef(null);
   const modalizeRef3 = useRef(null);
 
-  useEffect(() => {
-    produtoService.getProdutos().then(data => setProdutos(data));
-  }, [reload]);
-
+  
   const openNewProductModal = () => {
     modalizeRef1.current?.open();
   };
-
+  
   const openUpdateProductModal = data => {
     setProdutoUpdate(data);
     modalizeRef2.current?.open();
@@ -64,6 +61,101 @@ export const CrudProdutos = () => {
     setProdutoDelete(data);
     modalizeRef3.current?.open();
   };
+  
+  const [search, setSearch] = useState('');
+  const [filtredData, setFiltredData] = useState([]);
+
+  useEffect(() => {
+    produtoService.getProdutos().then((data) => {setProdutos(data); setFiltredData(data);});
+  }, [reload]);
+
+  const searchBarFunction = (input) => {
+    if(input) {
+      const newProdutos = produtos.filter(function (item){
+
+        const produtoData = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
+        const inputData = input.toUpperCase();
+
+        return produtoData.indexOf(inputData) > -1;
+      });
+      setFiltredData(newProdutos);
+      setSearch(input);
+    }
+    else {
+      setFiltredData(produtos);
+      setSearch(input);
+    }
+  } 
+
+  const item = ({item}) => { 
+    return(
+    <ScrollView style={styles.item}>
+      <View style={styles.headerProduct}>
+        <Text
+          style={[styles.nome, {color: modeBoolean ? '#fff' : 'black'}]}>
+          {item.nome}
+        </Text>
+        <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
+      </View>
+      <View style={styles.bodyProduct}>
+        <Image
+          style={{width: 75, height: 75}}
+          source={{uri: item.fotoLink}}
+        />
+        <View style={styles.bodyDescription}>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Regular',
+              color: modeBoolean ? '#fff' : 'black',
+            }}>
+            {item.descricao}
+          </Text>
+          <Text
+            style={[
+              styles.valor,
+              {color: modeBoolean ? '#fff' : 'black'},
+            ]}>
+            R$ {item.valor.toFixed(2)}
+          </Text>
+          <View style={styles.categoryLabel}>
+            <Image
+              source={IconLabel}
+              style={{tintColor: modeBoolean ? '#fff' : 'black'}}
+            />
+            <Text
+              style={{
+                fontFamily: 'Montserrat-Regular',
+                fontSize: 12,
+                color: modeBoolean ? '#fff' : 'black',
+              }}>
+              {item.nomeCategoria.charAt(0).toUpperCase() +
+                item.nomeCategoria.slice(1).toLowerCase()}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.editIcons}>
+          <TouchableOpacity onPress={() => openUpdateProductModal(item)}>
+            <Image
+              style={[
+                styles.crudButtons,
+                {
+                  marginBottom: 15,
+                  tintColor: modeBoolean ? '#fff' : 'black',
+                },
+              ]}
+              source={IconEdit}></Image>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => openDeleteProductModal(item)}>
+            <Image
+              style={[
+                styles.crudButtons,
+                {tintColor: modeBoolean ? '#fff' : 'black'},
+              ]}
+              source={IconTrash}></Image>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView> )}
 
   return (
     <View
@@ -124,7 +216,7 @@ export const CrudProdutos = () => {
           styles.searchBar,
           {backgroundColor: modeBoolean ? '#fff' : '#e9e9e9'},
         ]}>
-        <TextInput style={styles.inputSearch} />
+        <TextInput style={styles.inputSearch} value={search} onChangeText={(input) => searchBarFunction(input)} />
         <TouchableOpacity>
           <Image
             source={IconSearch}
@@ -137,78 +229,11 @@ export const CrudProdutos = () => {
       </View>
 
       <FlatList
-        data={produtos}
+        data={filtredData}
         keyExtractor={item => item.id}
         contentContainerStyle={{paddingBottom: 150}}
-        renderItem={({item}) => (
-          <ScrollView style={styles.item}>
-            <View style={styles.headerProduct}>
-              <Text
-                style={[styles.nome, {color: modeBoolean ? '#fff' : 'black'}]}>
-                {item.nome}
-              </Text>
-              <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
-            </View>
-            <View style={styles.bodyProduct}>
-              <Image
-                style={{width: 75, height: 75}}
-                source={{uri: item.fotoLink}}
-              />
-              <View style={styles.bodyDescription}>
-                <Text
-                  style={{
-                    fontFamily: 'Montserrat-Regular',
-                    color: modeBoolean ? '#fff' : 'black',
-                  }}>
-                  {item.descricao}
-                </Text>
-                <Text
-                  style={[
-                    styles.valor,
-                    {color: modeBoolean ? '#fff' : 'black'},
-                  ]}>
-                  R$ {item.valor.toFixed(2)}
-                </Text>
-                <View style={styles.categoryLabel}>
-                  <Image
-                    source={IconLabel}
-                    style={{tintColor: modeBoolean ? '#fff' : 'black'}}
-                  />
-                  <Text
-                    style={{
-                      fontFamily: 'Montserrat-Regular',
-                      fontSize: 12,
-                      color: modeBoolean ? '#fff' : 'black',
-                    }}>
-                    {item.nomeCategoria.charAt(0).toUpperCase() +
-                      item.nomeCategoria.slice(1).toLowerCase()}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.editIcons}>
-                <TouchableOpacity onPress={() => openUpdateProductModal(item)}>
-                  <Image
-                    style={[
-                      styles.crudButtons,
-                      {
-                        marginBottom: 15,
-                        tintColor: modeBoolean ? '#fff' : 'black',
-                      },
-                    ]}
-                    source={IconEdit}></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => openDeleteProductModal(item)}>
-                  <Image
-                    style={[
-                      styles.crudButtons,
-                      {tintColor: modeBoolean ? '#fff' : 'black'},
-                    ]}
-                    source={IconTrash}></Image>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
-        )}></FlatList>
+        renderItem={item}>
+        </FlatList>
       <NewProductModal
         modeBoolean={modeBoolean}
         modalizeRef1={modalizeRef1}
