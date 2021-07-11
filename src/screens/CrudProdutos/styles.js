@@ -1,12 +1,13 @@
-import React,{ useContext } from 'react';
-import {StyleSheet } from 'react-native';
-import { ModeContext } from '../../contexts/ContextDarkLight';
+import React, {useContext} from 'react';
+import {StyleSheet} from 'react-native';
+import {ModeContext} from '../../contexts/ContextDarkLight';
 
-const { modeBoolean, setModeBoolean } = useContext(ModeContext);
+const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 
 export const styles = StyleSheet.create({
   container: {
     fontFamily: 'Montserrat-Regular',
+    paddingTop: 20,
   },
   searchBar: {
     borderRadius: 3.81,
