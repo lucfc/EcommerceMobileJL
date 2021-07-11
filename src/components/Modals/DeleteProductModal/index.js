@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import { styles } from './styles'
-import ProdutoService from '../../../screens/CrudProdutos/produtoService';
+import ProdutoService from '../../../services/produtoService';
 
 export const DeleteProductModal = ({ modalizeRefDelete, produtoDelete, reload, setReload, modeBoolean }) => {
 

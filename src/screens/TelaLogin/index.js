@@ -25,7 +25,7 @@ export const TelaLogin = () => {
   const entrar = () => {
     console.log(id);
     funcionarioService.getById(id).then(res=>{
-      if (senha == res.cpf){
+      if (senha == res.nome){
         navigation.navigate('CrudProdutos')
       } else {
         "Senha ou usuário inválido"

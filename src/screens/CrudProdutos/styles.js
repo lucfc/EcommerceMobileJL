@@ -1,8 +1,4 @@
-import React, {useContext} from 'react';
 import {StyleSheet} from 'react-native';
-import {ModeContext} from '../../contexts/ContextDarkLight';
-
-const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 
 export const styles = StyleSheet.create({
   container: {
@@ -41,9 +37,12 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   containerHeaderBack: {
+    width: '33%',
+  },
+  backButton:{
     flexDirection: 'row',
     alignItems: 'center',
-    width: '33%',
+    width:80,
   },
   containerHeaderImageMode: {
     flexDirection: 'row',
