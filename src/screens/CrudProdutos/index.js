@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {styles} from './styles';
-import ProdutoService from './produtoService';
+import ProdutoService from '../../services/produtoService';
 import {NewProductModal} from '../../components/Modals/NewProductModal';
 import {UpdateProductModal} from '../../components/Modals/UpdateProductModal';
 import {DeleteProductModal} from '../../components/Modals/DeleteProductModal';

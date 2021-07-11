@@ -3,7 +3,7 @@ import { TextInput, Text, View, Image, TouchableOpacity } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 
 import { styles } from './styles'
-import ProdutoService from '../../../screens/CrudProdutos/produtoService';
+import ProdutoService from '../../../services/produtoService';
 
 import iconExit from '../../../assets/icons/exit.png';
 import iconConfirm from '../../../assets/icons/confirm.png';
