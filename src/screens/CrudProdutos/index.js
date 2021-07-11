@@ -44,22 +44,22 @@ export const CrudProdutos = () => {
 
   const [reload, setReload] = useState(false);
 
-  const modalizeRef1 = useRef(null);
-  const modalizeRef2 = useRef(null);
-  const modalizeRef3 = useRef(null);
+  const modalizeRefNew = useRef(null);
+  const modalizeRefUpdate = useRef(null);
+  const modalizeRefDelete = useRef(null);
 
   
   const openNewProductModal = () => {
-    modalizeRef1.current?.open();
+    modalizeRefNew.current?.open();
   };
   
   const openUpdateProductModal = data => {
     setProdutoUpdate(data);
-    modalizeRef2.current?.open();
+    modalizeRefUpdate.current?.open();
   };
   const openDeleteProductModal = data => {
     setProdutoDelete(data);
-    modalizeRef3.current?.open();
+    modalizeRefDelete.current?.open();
   };
   
   const [search, setSearch] = useState('');
@@ -237,20 +237,20 @@ export const CrudProdutos = () => {
         </FlatList>
       <NewProductModal
         modeBoolean={modeBoolean}
-        modalizeRef1={modalizeRef1}
+        modalizeRefNew={modalizeRefNew}
         reload={reload}
         setReload={setReload}
       />
       <UpdateProductModal
         modeBoolean={modeBoolean}
-        modalizeRef2={modalizeRef2}
+        modalizeRefUpdate={modalizeRefUpdate}
         reload={reload}
         setReload={setReload}
         produtoUpdate={produtoUpdate}
       />
       <DeleteProductModal
         modeBoolean={modeBoolean}
-        modalizeRef3={modalizeRef3}
+        modalizeRefDelete={modalizeRefDelete}
         reload={reload}
         setReload={setReload}
         produtoDelete={produtoDelete}

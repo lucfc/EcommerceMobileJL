@@ -8,7 +8,7 @@ import ProdutoService from '../../../screens/CrudProdutos/produtoService';
 import iconExit from '../../../assets/icons/exit.png';
 import iconConfirm from '../../../assets/icons/confirm.png';
 
-export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpdate, modeBoolean }) => {
+export const UpdateProductModal = ({ modalizeRefUpdate, reload, setReload, produtoUpdate, modeBoolean }) => {
 
     const [nome, setNome] = useState(produtoUpdate.nome)
     const [descricao, setDescricao] = useState(produtoUpdate.descricao)
@@ -53,7 +53,7 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
     }
 
     const handleCloseModal = () => {
-        modalizeRef2.current.close()
+        modalizeRefUpdate.current.close()
     }
 
     const updateProductsAndClose = () => {
@@ -65,7 +65,7 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
     }
 
     return (
-        <Modalize ref={modalizeRef2}
+        <Modalize ref={modalizeRefUpdate}
             closeOnOverlayTap={true}
             modalHeight={800}
             handlePosition='inside'

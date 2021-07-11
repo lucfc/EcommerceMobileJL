@@ -5,10 +5,10 @@ import { Modalize } from 'react-native-modalize';
 import { styles } from './styles'
 import ProdutoService from '../../../screens/CrudProdutos/produtoService';
 
-export const DeleteProductModal = ({ modalizeRef3, produtoDelete, reload, setReload, modeBoolean }) => {
+export const DeleteProductModal = ({ modalizeRefDelete, produtoDelete, reload, setReload, modeBoolean }) => {
 
     const handleCloseModal = () => {
-        modalizeRef3.current.close();
+        modalizeRefDelete.current.close();
     };
 
     const [nome, setNome] = useState(produtoDelete.nome)
@@ -22,7 +22,7 @@ export const DeleteProductModal = ({ modalizeRef3, produtoDelete, reload, setRel
     const deleteAndClose = () => {
         produtoService.deleteProdutos(produtoDelete.id).then(res => {
             setReload(!reload)
-            modalizeRef3.current.close()
+            modalizeRefDelete.current.close()
         }
         ).catch(e => console.log(e));
     };
@@ -30,7 +30,7 @@ export const DeleteProductModal = ({ modalizeRef3, produtoDelete, reload, setRel
     return (
         <>
             <Modalize
-                ref={modalizeRef3}
+                ref={modalizeRefDelete}
                 closeOnOverlayTap={true}
                 modalHeight={400}
                 handlePosition='inside'
