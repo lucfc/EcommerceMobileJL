@@ -19,18 +19,21 @@ export const TelaLogin = () => {
 
   const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 
-  const [id,setId] = useState();
+  const [id, setId] = useState();
   const [senha, setSenha] = useState();
 
   const entrar = () => {
-    funcionarioService.getById(id).then(res=>{
-      if (senha == res.nome){
-        navigation.navigate('CrudProdutos')
-      } else {
-        "Senha ou usuário inválido"
-      }
-    }).catch("Senha ou usuário inválido")
-  }
+    funcionarioService
+      .getById(id)
+      .then(res => {
+        if (senha == res.nome) {
+          navigation.navigate('CrudProdutos');
+        } else {
+          ('Senha ou usuário inválido');
+        }
+      })
+      .catch('Senha ou usuário inválido');
+  };
 
   return (
     <View
@@ -66,19 +69,34 @@ export const TelaLogin = () => {
           <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={[
             Styles.BotaoCadastro,
             {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}>
           <Text style={Styles.TextoBotaoCadastro}>Cadastre-se</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View>
-        <TextInput style={{backgroundColor:'#000',color:'#fff', width: 180, marginTop:10}} onChangeText={data=> setId(data)}/>
-        <TextInput style={{backgroundColor:'#000',color:'#fff', width: 180, marginTop:10}} onChangeText={data=> setSenha(data)}/>
+        <TextInput
+          style={{
+            backgroundColor: '#000',
+            color: '#fff',
+            width: 180,
+            marginTop: 10,
+          }}
+          onChangeText={data => setId(data)}
+        />
+        <TextInput
+          style={{
+            backgroundColor: '#000',
+            color: '#fff',
+            width: 180,
+            marginTop: 10,
+          }}
+          onChangeText={data => setSenha(data)}
+        />
       </View>
-      
     </View>
   );
 };
