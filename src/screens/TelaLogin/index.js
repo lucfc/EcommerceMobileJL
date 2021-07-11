@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 
 import {Styles} from './styles';
 
@@ -44,7 +44,7 @@ export const TelaLogin = () => {
         <TouchableOpacity
           style={[
             Styles.BotaoEntrar,
-            {backgroundColor: modeBoolean ? '#fff' : '#535353'},
+            {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}
           onPress={() => navigation.navigate('CrudProdutos')}>
           <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
@@ -53,11 +53,16 @@ export const TelaLogin = () => {
         <TouchableOpacity
           style={[
             Styles.BotaoCadastro,
-            {backgroundColor: modeBoolean ? '#fff' : '#535353'},
+            {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}>
           <Text style={Styles.TextoBotaoCadastro}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
+      <View>
+        <TextInput/>
+        <TextInput/>
+      </View>
+      
     </View>
   );
 };

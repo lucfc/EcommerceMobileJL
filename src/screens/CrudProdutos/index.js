@@ -88,6 +88,7 @@ export const CrudProdutos = () => {
   } 
 
   const item = ({item}) => { 
+
     return(
     <ScrollView style={styles.item}>
       <View style={styles.headerProduct}>
@@ -98,7 +99,7 @@ export const CrudProdutos = () => {
         <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
       </View>
       <View style={styles.bodyProduct}>
-        <Image
+        <Image 
           style={{width: 75, height: 75}}
           source={{uri: item.fotoLink}}
         />

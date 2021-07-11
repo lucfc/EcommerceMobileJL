@@ -53,14 +53,7 @@ export const UpdateProductModal = ({ modalizeRef2, reload, setReload, produtoUpd
     }
 
     const handleCloseModal = () => {
-        setNome('')
-        setDescricao('')
-        setCategoria(0)
-        setFuncionario(0)
-        setQtdEstoque(0)
-        setValor(0)
-        setColorBoolean(true)
-        modalizeRef2.current.close();
+        modalizeRef2.current.close()
     }
 
     const updateProductsAndClose = () => {
