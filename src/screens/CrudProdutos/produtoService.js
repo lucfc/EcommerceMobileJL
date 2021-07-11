@@ -7,7 +7,6 @@ export default class produtoService {
     }
 
     postProdutos(produto) {
-        console.log("entrou aqui");
         return api.post('produto', produto).then(res => res.data);
     }
 

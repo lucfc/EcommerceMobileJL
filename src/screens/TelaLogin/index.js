@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 
 import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 
@@ -7,6 +7,7 @@ import {Styles} from './styles';
 import ImgLogo from '../../assets/icons/logo.png';
 import IconLightMode from '../../assets/icons/lightMode.png';
 import IconDarkMode from '../../assets/icons/darkMode.png';
+import FuncionarioService from '../../services/funcionarioService';
 
 import {useNavigation} from '@react-navigation/native';
 import {ModeContext} from '../../contexts/ContextDarkLight';
@@ -14,7 +15,23 @@ import {ModeContext} from '../../contexts/ContextDarkLight';
 export const TelaLogin = () => {
   const navigation = useNavigation();
 
+  const funcionarioService = new FuncionarioService();
+
   const {modeBoolean, setModeBoolean} = useContext(ModeContext);
+
+  const [id,setId] = useState();
+  const [senha, setSenha] = useState();
+
+  const entrar = () => {
+    console.log(id);
+    funcionarioService.getById(id).then(res=>{
+      if (senha == res.cpf){
+        navigation.navigate('CrudProdutos')
+      } else {
+        "Senha ou usuário inválido"
+      }
+    }).catch("Senha ou usuário inválido")
+  }
 
   return (
     <View
@@ -46,7 +63,7 @@ export const TelaLogin = () => {
             Styles.BotaoEntrar,
             {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}
-          onPress={() => navigation.navigate('CrudProdutos')}>
+          onPress={() => entrar()}>
           <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
         </TouchableOpacity>
 
@@ -59,8 +76,8 @@ export const TelaLogin = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <TextInput/>
-        <TextInput/>
+        <TextInput style={{backgroundColor:'#000',color:'#fff', width: 180, marginTop:10}} onChangeText={data=> setId(data)}/>
+        <TextInput style={{backgroundColor:'#000',color:'#fff', width: 180, marginTop:10}} onChangeText={data=> setSenha(data)}/>
       </View>
       
     </View>
