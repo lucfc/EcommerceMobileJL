@@ -19,7 +19,7 @@ const icons = {
     lib: AntDesign,
     name: 'mail',
   },
-  Logout: {
+  Sair: {
     lib: AntDesign,
     name: 'logout',
   },
@@ -61,10 +61,10 @@ export const Navigation = () => {
         }}
       />
       <Tab.Screen
-        name="Logout"
+        name="Sair"
         component={LogoutModal}
         options={{
-          title: 'Logout',
+          title: 'Sair',
           tabBarVisible: false,
         }}
       />

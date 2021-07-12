@@ -23,7 +23,7 @@ export const Login = () => {
 
   const [id, setId] = useState();
   const [senha, setSenha] = useState();
-  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
 
   const funcionarioService = new FuncionarioService();
 
@@ -88,57 +88,56 @@ export const Login = () => {
         </View>
       </View>
       <View>
-        <View>
+        <View style={styles.containerInputUser}>
           <Text
             style={[styles.Usuario, {color: modeBoolean ? '#fff' : 'black'}]}>
             Usuário
           </Text>
-        </View>
-        <TextInput
-          paddingLeft={12}
-          style={[
-            styles.Caxinha,
-            {backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff'},
-          ]}
-          onChangeText={valueId => setId(valueId)}></TextInput>
-        <View></View>
-        <Text
-          style={[styles.Usuario1, {color: modeBoolean ? '#fff' : 'black'}]}>
-          Senha
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: 310,
-            alignSelf: 'center',
-            backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff',
-          }}>
           <TextInput
-            secureTextEntry={passwordVisibility}
             paddingLeft={12}
             style={[
-              styles.Caxinha1,
+              styles.Caxinha,
               {backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff'},
             ]}
-            onChangeText={valueSenha => setSenha(valueSenha)}></TextInput>
-          <TouchableOpacity
-            style={styles.visibility}
-            onPress={() => setPasswordVisibility(!passwordVisibility)}>
-            <Image
-              source={passwordVisibility ? IconVisibility : IconInvisibility}
-            />
-          </TouchableOpacity>
+            onChangeText={valueId => setId(valueId)}></TextInput>
         </View>
-        <TouchableOpacity onPress={() => entrar()}>
+        <View style={styles.containerInputKey}>
+          <Text style={[styles.Senha, {color: modeBoolean ? '#fff' : 'black'}]}>
+            Senha
+          </Text>
           <View
-            style={[
-              styles.Caxinha2,
-              {backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff'},
-            ]}>
-            <Text style={styles.Entrar1}> Entrar </Text>
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 320,
+              borderRadius: 3,
+              backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff',
+            }}>
+            <TextInput
+              secureTextEntry={passwordVisibility}
+              paddingLeft={12}
+              style={[
+                styles.Caxinha1,
+                {backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff'},
+              ]}
+              onChangeText={valueSenha => setSenha(valueSenha)}></TextInput>
+            <TouchableOpacity
+              style={styles.visibility}
+              onPress={() => setPasswordVisibility(!passwordVisibility)}>
+              <Image
+                source={passwordVisibility ? IconVisibility : IconInvisibility}
+              />
+            </TouchableOpacity>
           </View>
+        </View>
+        <TouchableOpacity
+          style={[
+            styles.Caxinha2,
+            {backgroundColor: !modeBoolean ? '#c5c5c5' : '#fff'},
+          ]}
+          onPress={() => entrar()}>
+          <Text style={styles.Entrar1}> Entrar </Text>
         </TouchableOpacity>
       </View>
     </View>

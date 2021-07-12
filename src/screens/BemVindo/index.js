@@ -28,7 +28,7 @@ export const BemVindo = () => {
       ]}>
       {/* View de login: Logo + botão Entrar + botão Cadastre-se  */}
 
-      <View>
+      <View style={Styles.containerIconDarkLight}>
         <TouchableOpacity
           onPress={() => {
             setModeBoolean();

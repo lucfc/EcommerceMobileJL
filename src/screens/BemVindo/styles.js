@@ -5,7 +5,10 @@ export const Styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
   },
-
+  containerIconDarkLight: {
+    alignSelf: 'flex-end',
+    marginRight: 10,
+  },
   ImgLogo: {
     height: 223,
     width: 185,
@@ -42,7 +45,6 @@ export const Styles = StyleSheet.create({
     height: 30,
     width: 30,
     transform: [{rotate: '32.43deg'}],
-    marginLeft: 340,
     marginTop: 15,
   },
 });
