@@ -44,7 +44,9 @@ export const TelaLogin = () => {
       {/* View de login: Logo + botão Entrar + botão Cadastre-se  */}
 
       <View>
-        <TouchableOpacity onPress={() => setModeBoolean(!modeBoolean)}>
+        <TouchableOpacity onPress={() => {
+          setModeBoolean()
+        }}>
           <Image
             source={modeBoolean ? IconLightMode : IconDarkMode}
             style={Styles.IconDarkMode}

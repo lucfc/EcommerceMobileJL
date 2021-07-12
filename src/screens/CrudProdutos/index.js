@@ -194,7 +194,7 @@ export const CrudProdutos = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.containerHeaderImageMode}>
-          <TouchableOpacity onPress={() => setModeBoolean(!modeBoolean)}>
+          <TouchableOpacity onPress={() => setModeBoolean()}>
             <Image
               source={modeBoolean ? IconLight : IconDark}
               style={styles.switchModeDarkLight}
