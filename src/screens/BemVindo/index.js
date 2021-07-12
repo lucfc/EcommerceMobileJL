@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
-import { Styles } from './styles';
+import {Styles} from './styles';
 
 import ImgLogo from '../../assets/icons/logo.png';
 import IconLightMode from '../../assets/icons/lightMode.png';
@@ -10,6 +10,7 @@ import IconDarkMode from '../../assets/icons/darkMode.png';
 
 import {useNavigation} from '@react-navigation/native';
 import {ModeContext} from '../../contexts/ContextDarkLight';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const BemVindo = () => {
@@ -28,9 +29,10 @@ export const BemVindo = () => {
       {/* View de login: Logo + botão Entrar + botão Cadastre-se  */}
 
       <View>
-        <TouchableOpacity onPress={() => {
-          setModeBoolean()
-        }}>
+        <TouchableOpacity
+          onPress={() => {
+            setModeBoolean();
+          }}>
           <Image
             source={modeBoolean ? IconLightMode : IconDarkMode}
             style={Styles.IconDarkMode}
@@ -51,7 +53,11 @@ export const BemVindo = () => {
             Styles.BotaoEntrar,
             {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}
-          onPress={async () => await AsyncStorage.getItem('@logado')==="logou" ? navigation.navigate('CrudProdutos') : navigation.navigate('Login')}>
+          onPress={async () =>
+            (await AsyncStorage.getItem('@logado')) === 'logou'
+              ? navigation.navigate('Navigation')
+              : navigation.navigate('Login')
+          }>
           <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
         </TouchableOpacity>
 

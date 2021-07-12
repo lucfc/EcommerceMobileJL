@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 18,
-    marginTop: 26,
+    marginTop: 20,
     marginHorizontal: 10,
     height: 27.79,
     maxWidth: '94%',
@@ -39,10 +39,10 @@ export const styles = StyleSheet.create({
   containerHeaderBack: {
     width: '33%',
   },
-  backButton:{
+  backButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    width:80,
+    width: 80,
   },
   containerHeaderImageMode: {
     flexDirection: 'row',
@@ -91,7 +91,7 @@ export const styles = StyleSheet.create({
   },
   bodyProduct: {
     flexDirection: 'row',
-    marginBottom: 30,
+    marginBottom: 15,
     paddingTop: 15,
     height: 100,
   },
