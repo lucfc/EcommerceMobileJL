@@ -69,7 +69,9 @@ export const styles = StyleSheet.create({
         width:30,
         resizeMode:'contain'
     },
-    confirmImage:{
-
-    }
+    textError:{
+        fontFamily: 'Montserrat-Regular',
+        fontSize:10,
+        color: 'red'
+    },
 })

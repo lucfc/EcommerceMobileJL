@@ -8,10 +8,13 @@ import ProdutoService from '../../../services/produtoService';
 export const DeleteProductModal = ({ modalizeRefDelete, produtoDelete, reload, setReload, modeBoolean }) => {
 
     const handleCloseModal = () => {
+        setErro(false)
         modalizeRefDelete.current.close();
     };
 
     const [nome, setNome] = useState(produtoDelete.nome)
+
+    const [erro, setErro] = useState(false)
 
     const produtoService = new ProdutoService();
 
@@ -21,10 +24,11 @@ export const DeleteProductModal = ({ modalizeRefDelete, produtoDelete, reload, s
 
     const deleteAndClose = () => {
         produtoService.deleteProdutos(produtoDelete.id).then(res => {
+            setErro(false)
             setReload(!reload)
             modalizeRefDelete.current.close()
         }
-        ).catch(e => console.log(e));
+        ).catch(()=> setErro(true));
     };
 
     return (
@@ -55,6 +59,7 @@ export const DeleteProductModal = ({ modalizeRefDelete, produtoDelete, reload, s
                             <Text style={ styles.textButtonNao }>Não</Text>
                         </TouchableOpacity>
                     </View>
+                    { erro ? <Text style={styles.textError}>*Não é possivel deletar um produto original do site.</Text> : <></>}
                 </View>
             </Modalize>
         </>

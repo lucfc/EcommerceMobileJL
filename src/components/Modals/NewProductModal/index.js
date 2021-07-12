@@ -18,6 +18,8 @@ export const NewProductModal = ({ modeBoolean, modalizeRefNew, reload, setReload
     const [valor, setValor] = useState(0)
     const [colorBoolean, setColorBoolean] = useState(true)
 
+    const [erro, setErro] = useState(false)
+
     const produtoService = new ProdutoService();
 
     useEffect(() => {
@@ -45,6 +47,7 @@ export const NewProductModal = ({ modeBoolean, modalizeRefNew, reload, setReload
         setQtdEstoque(0)
         setValor(0)
         setColorBoolean(true)
+        setErro(false)
         modalizeRefNew.current.close();
     }
 
@@ -52,7 +55,8 @@ export const NewProductModal = ({ modeBoolean, modalizeRefNew, reload, setReload
         produtoService.postProdutos(produto).then(res => {
             handleCloseModal()
             setReload(!reload)
-        }).catch(e => { console.log(e) })
+            setErro(false)
+        }).catch(() => setErro(true))
     }
 
     return (
@@ -74,29 +78,35 @@ export const NewProductModal = ({ modeBoolean, modalizeRefNew, reload, setReload
                 <View style={styles.containerName}>
                     <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Nome</Text>
                     <TextInput style={[styles.inputName, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} onChangeText={(value) => setName(value)}></TextInput>
+                    { erro ? <Text style={styles.textError}>*Nome tem que ter entre 6 a 20 caracteres.</Text> : <></>}
                 </View>
                 <View style={styles.containerDescription}>
                     <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Descrição</Text>
                     <TextInput style={[styles.inputDescription, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} onChangeText={(value) => setDescricao(value)}></TextInput>
+                    { erro ? <Text style={styles.textError}>*Descrição tem que ter entre 6 a 20 caracteres.</Text> : <></>}
                 </View>
                 <View style={styles.containerTwoItems}>
                     <View style={styles.containerItem}>
                         <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Qtd. de estoque</Text>
                         <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} keyboardType={'numeric'} onChangeText={(value) => setQtdEstoque(value)}></TextInput>
+                        { erro ? <Text style={{color: !modeBoolean ? '#fff': 'black'}}>*Erro</Text> : <></>}                   
                     </View>
                     <View style={styles.containerItem}>
                         <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>IdCategoria</Text>
                         <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} keyboardType={'numeric'} onChangeText={(value) => setCategoria(value)}></TextInput>
+                        { erro ? <Text style={styles.textError}>*Verifique o id da categoria</Text> : <></>} 
                     </View>
                 </View>
                 <View style={styles.containerTwoItems}>
                     <View style={styles.containerItem}>
                         <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>Valor</Text>
                         <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} keyboardType={'numeric'} onChangeText={(value) => setValor(value)}></TextInput>
+                        { erro ? <Text style={{color: !modeBoolean ? '#fff': 'black'}}>*Erro</Text> : <></>} 
                     </View>
                     <View style={styles.containerItem}>
                         <Text style={[styles.text,{color: modeBoolean ? '#fff': 'black'}]}>IdFuncionário</Text>
                         <TextInput style={[styles.inputItems, {backgroundColor: modeBoolean ? '#fff': '#e9e9e9'}]} keyboardType={'numeric'} onChangeText={(value) => setFuncionario(value)}></TextInput>
+                        { erro ? <Text style={styles.textError}>*Verifique o id do funcionário</Text> : <></>}
                     </View>
                 </View>
                 <TouchableOpacity disabled={colorBoolean} onPress={() => saveProductsAndClose()} style={[styles.containerConfirm, {borderColor: !colorBoolean ? '#4BBE23' : '#535353'}]}>

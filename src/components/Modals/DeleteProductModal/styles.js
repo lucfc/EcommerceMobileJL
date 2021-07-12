@@ -39,5 +39,10 @@ export const styles = StyleSheet.create({
     textButtonNao:{
         fontSize: 20,
         color: '#962b1b'
-    }
+    },
+    textError:{
+        fontFamily: 'Montserrat-Regular',
+        fontSize:10,
+        color: 'red'
+    },
 })
