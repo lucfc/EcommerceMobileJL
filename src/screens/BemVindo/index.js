@@ -1,39 +1,23 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 
-import {Styles} from './styles';
+import { Styles } from './styles';
 
 import ImgLogo from '../../assets/icons/logo.png';
 import IconLightMode from '../../assets/icons/lightMode.png';
 import IconDarkMode from '../../assets/icons/darkMode.png';
-import FuncionarioService from '../../services/funcionarioService';
 
 import {useNavigation} from '@react-navigation/native';
 import {ModeContext} from '../../contexts/ContextDarkLight';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const TelaLogin = () => {
+export const BemVindo = () => {
   const navigation = useNavigation();
-
-  const funcionarioService = new FuncionarioService();
 
   const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 
-  const [id, setId] = useState();
-  const [senha, setSenha] = useState();
-
-  const entrar = () => {
-    funcionarioService
-      .getById(id)
-      .then(res => {
-        if (senha == res.nome) {
-          navigation.navigate('CrudProdutos');
-        } else {
-          ('Senha ou usuário inválido');
-        }
-      })
-      .catch('Senha ou usuário inválido');
-  };
+  console.log(AsyncStorage.getItem('@logado'));
 
   return (
     <View
@@ -67,7 +51,7 @@ export const TelaLogin = () => {
             Styles.BotaoEntrar,
             {backgroundColor: modeBoolean ? '#fff' : '#c4c4c4'},
           ]}
-          onPress={() => entrar()}>
+          onPress={async () => await AsyncStorage.getItem('@logado')==="logou" ? navigation.navigate('CrudProdutos') : navigation.navigate('Login')}>
           <Text style={Styles.TextoBotaoEntrar}> Entrar</Text>
         </TouchableOpacity>
 
@@ -78,26 +62,6 @@ export const TelaLogin = () => {
           ]}>
           <Text style={Styles.TextoBotaoCadastro}>Cadastre-se</Text>
         </TouchableOpacity> */}
-      </View>
-      <View>
-        <TextInput
-          style={{
-            backgroundColor: '#000',
-            color: '#fff',
-            width: 180,
-            marginTop: 10,
-          }}
-          onChangeText={data => setId(data)}
-        />
-        <TextInput
-          style={{
-            backgroundColor: '#000',
-            color: '#fff',
-            width: 180,
-            marginTop: 10,
-          }}
-          onChangeText={data => setSenha(data)}
-        />
       </View>
     </View>
   );
