@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useState, useEffect, useContext} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {ModeContext} from '../../../contexts/ContextDarkLight';
@@ -24,6 +25,7 @@ export const LogoutModal = ({navigation}) => {
         <TouchableOpacity
           style={styles.buttonSim}
           onPress={() => {
+            AsyncStorage.removeItem('@logado')
             navigation.navigate('Login');
           }}>
           <Text style={styles.textButtonSim}>Sim</Text>

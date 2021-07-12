@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState, useContext} from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import {
   Text,
   View,
@@ -9,13 +9,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {styles} from './styles';
+import { styles } from './styles';
 import ProdutoService from '../../services/produtoService';
-import {NewProductModal} from '../../components/Modals/NewProductModal';
-import {UpdateProductModal} from '../../components/Modals/UpdateProductModal';
-import {DeleteProductModal} from '../../components/Modals/DeleteProductModal';
-import {LogoutModal} from '../../components/Modals/LogoutModal';
-import {ModeContext} from '../../contexts/ContextDarkLight';
+import { NewProductModal } from '../../components/Modals/NewProductModal';
+import { UpdateProductModal } from '../../components/Modals/UpdateProductModal';
+import { DeleteProductModal } from '../../components/Modals/DeleteProductModal';
+import { ModeContext } from '../../contexts/ContextDarkLight';
+import { Header } from '../../components/Header';
 
 import IconBack from '../../assets/icons/backArrow.png';
 import IconLogo from '../../assets/icons/logo.png';
@@ -26,7 +26,7 @@ import IconEdit from '../../assets/icons/edit.png';
 import IconTrash from '../../assets/icons/trash.png';
 import IconLabel from '../../assets/icons/label.png';
 
-export const CrudProdutos = ({navigation}) => {
+export const CrudProdutos = ({ navigation }) => {
   const [produtos, setProdutos] = useState([]);
   const [produtoUpdate, setProdutoUpdate] = useState({
     descricao: '',
@@ -41,7 +41,7 @@ export const CrudProdutos = ({navigation}) => {
   });
   const produtoService = new ProdutoService();
 
-  const {modeBoolean, setModeBoolean} = useContext(ModeContext);
+  const { modeBoolean, setModeBoolean } = useContext(ModeContext);
 
   const [reload, setReload] = useState(false);
 
@@ -91,19 +91,19 @@ export const CrudProdutos = ({navigation}) => {
     }
   };
 
-  const item = ({item}) => {
+  const item = ({ item }) => {
     return (
       <ScrollView style={styles.item}>
         <View style={styles.headerProduct}>
-          <Text style={[styles.nome, {color: modeBoolean ? '#fff' : 'black'}]}>
+          <Text style={[styles.nome, { color: modeBoolean ? '#fff' : 'black' }]}>
             {item.nome}
           </Text>
           <Text style={styles.id}>{`(ID: ${item.id})`}</Text>
         </View>
         <View style={styles.bodyProduct}>
           <Image
-            style={{width: 75, height: 75}}
-            source={{uri: item.fotoLink}}
+            style={{ width: 75, height: 75 }}
+            source={{ uri: item.fotoLink }}
           />
           <View style={styles.bodyDescription}>
             <Text
@@ -114,13 +114,13 @@ export const CrudProdutos = ({navigation}) => {
               {item.descricao}
             </Text>
             <Text
-              style={[styles.valor, {color: modeBoolean ? '#fff' : 'black'}]}>
+              style={[styles.valor, { color: modeBoolean ? '#fff' : 'black' }]}>
               R$ {item.valor.toFixed(2)}
             </Text>
             <View style={styles.categoryLabel}>
               <Image
                 source={IconLabel}
-                style={{tintColor: modeBoolean ? '#fff' : 'black'}}
+                style={{ tintColor: modeBoolean ? '#fff' : 'black' }}
               />
               <Text
                 style={{
@@ -149,7 +149,7 @@ export const CrudProdutos = ({navigation}) => {
               <Image
                 style={[
                   styles.crudButtons,
-                  {tintColor: modeBoolean ? '#fff' : 'black'},
+                  { tintColor: modeBoolean ? '#fff' : 'black' },
                 ]}
                 source={IconTrash}></Image>
             </TouchableOpacity>
@@ -164,61 +164,16 @@ export const CrudProdutos = ({navigation}) => {
       <View
         style={[
           styles.container,
-          {backgroundColor: modeBoolean ? 'black' : 'white'},
+          { backgroundColor: modeBoolean ? 'black' : 'white' },
         ]}>
-        <View
-          style={[
-            styles.containerHeader,
-            {borderColor: modeBoolean ? '#fff' : 'black'},
-          ]}>
-          <View style={styles.containerHeaderBack}>
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => navigation.navigate('Login')}>
-              <Image
-                source={IconBack}
-                style={[
-                  styles.back,
-                  {tintColor: modeBoolean ? '#fff' : 'black'},
-                ]}
-              />
-              <Text
-                style={[
-                  styles.headerText,
-                  {color: modeBoolean ? '#fff' : 'black'},
-                ]}>
-                Voltar
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.containerHeaderImageLogo}>
-            <TouchableOpacity>
-              <Image
-                source={IconLogo}
-                style={[
-                  styles.logo,
-                  {tintColor: modeBoolean ? '#fff' : 'black'},
-                ]}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.containerHeaderImageMode}>
-            <TouchableOpacity onPress={() => setModeBoolean()}>
-              <Image
-                source={modeBoolean ? IconLight : IconDark}
-                style={styles.switchModeDarkLight}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-
+        <Header />
         <View>
           <TouchableOpacity>
             <Text
               onPress={() => openNewProductModal()}
               style={[
                 styles.novoProduto,
-                {color: modeBoolean ? '#fff' : 'black'},
+                { color: modeBoolean ? '#fff' : 'black' },
               ]}>
               Novo produto +
             </Text>
@@ -227,7 +182,7 @@ export const CrudProdutos = ({navigation}) => {
         <View
           style={[
             styles.searchBar,
-            {backgroundColor: modeBoolean ? '#fff' : '#e9e9e9'},
+            { backgroundColor: modeBoolean ? '#fff' : '#e9e9e9' },
           ]}>
           <TextInput
             style={styles.inputSearch}
@@ -239,7 +194,7 @@ export const CrudProdutos = ({navigation}) => {
               source={IconSearch}
               style={[
                 styles.ImgSearch,
-                {backgroundColor: modeBoolean ? '#fff' : '#e9e9e9'},
+                { backgroundColor: modeBoolean ? '#fff' : '#e9e9e9' },
               ]}
             />
           </TouchableOpacity>
@@ -248,7 +203,7 @@ export const CrudProdutos = ({navigation}) => {
         <FlatList
           data={filtredData}
           keyExtractor={item => item.id}
-          contentContainerStyle={{paddingBottom: 200}}
+          contentContainerStyle={{ paddingBottom: 200 }}
           renderItem={item}></FlatList>
         <NewProductModal
           modeBoolean={modeBoolean}

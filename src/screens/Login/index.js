@@ -12,10 +12,10 @@ import FuncionarioService from '../../services/funcionarioService';
 import {useNavigation} from '@react-navigation/native';
 import {ModeContext} from '../../contexts/ContextDarkLight';
 import {styles} from './sytles';
+import { Header } from '../../components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Login = () => {
-  AsyncStorage.removeItem('@logado');
 
   const navigation = useNavigation();
 
@@ -48,45 +48,7 @@ export const Login = () => {
         styles.backGraud,
         {backgroundColor: modeBoolean ? '#000' : '#fff'},
       ]}>
-      <View
-        style={[
-          styles.containerHeader,
-          {borderColor: modeBoolean ? '#fff' : 'black'},
-        ]}>
-        <View style={styles.containerHeaderBack}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={IconBack}
-              style={[styles.back, {tintColor: modeBoolean ? '#fff' : 'black'}]}
-            />
-            <Text
-              style={[
-                styles.headerText,
-                {color: modeBoolean ? '#fff' : 'black'},
-              ]}>
-              Voltar
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.containerHeaderImageLogo}>
-          <TouchableOpacity>
-            <Image
-              source={IconLogo}
-              style={[styles.logo, {tintColor: modeBoolean ? '#fff' : 'black'}]}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.containerHeaderImageMode}>
-          <TouchableOpacity onPress={() => setModeBoolean()}>
-            <Image
-              source={modeBoolean ? IconLight : IconDark}
-              style={styles.switchModeDarkLight}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <Header/>
       <View>
         <View style={styles.containerInputUser}>
           <Text

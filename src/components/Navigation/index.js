@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ModeContext} from '../../contexts/ContextDarkLight';
 
 import {CrudProdutos} from '../../screens/CrudProdutos';
-import {ola} from '../../screens/Home';
+import { Contatos } from '../../screens/Contatos';
 import {LogoutModal} from '../Modals/LogoutModal';
 
 const Tab = createBottomTabNavigator();
@@ -55,7 +55,7 @@ export const Navigation = () => {
 
       <Tab.Screen
         name="Contact"
-        component={ola}
+        component={Contatos}
         options={{
           title: 'Contato',
         }}
