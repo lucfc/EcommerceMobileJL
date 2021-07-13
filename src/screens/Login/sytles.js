@@ -165,4 +165,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingRight: 5,
   },
+  erro:{
+    color: 'red',
+    fontSize: 13,
+    alignSelf:'center',
+    fontFamily: 'Montserrat-Regular',
+    marginTop:10
+  }
 });

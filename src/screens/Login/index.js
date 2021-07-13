@@ -24,22 +24,23 @@ export const Login = () => {
   const [id, setId] = useState();
   const [senha, setSenha] = useState();
   const [passwordVisibility, setPasswordVisibility] = useState(true);
+  const [erro, setErro] = useState(false);
 
   const funcionarioService = new FuncionarioService();
 
   const entrar = () => {
-    console.log('entrou no entrar');
     funcionarioService
       .getById(id)
       .then(res => {
         if (senha == res.nome) {
+          setErro(false);
           navigation.navigate('Navigation');
           AsyncStorage.setItem('@logado', 'logou');
         } else {
-          ('Senha ou usuário inválido');
+          setErro(true)
         }
       })
-      .catch('Senha ou usuário inválido');
+      .catch(()=>setErro(true));
   };
 
   return (
@@ -93,6 +94,7 @@ export const Login = () => {
             </TouchableOpacity>
           </View>
         </View>
+        {erro ? (<Text style={styles.erro}>*Usuário ou senha inválidos</Text>) : <></>}
         <TouchableOpacity
           style={[
             styles.Caxinha2,

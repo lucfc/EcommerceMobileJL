@@ -18,8 +18,6 @@ export const BemVindo = () => {
 
   const {modeBoolean, setModeBoolean} = useContext(ModeContext);
 
-  console.log(AsyncStorage.getItem('@logado'));
-
   return (
     <View
       style={[

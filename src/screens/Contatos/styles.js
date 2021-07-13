@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         // borderBottomWidth: 1
     },
     nome:{
-        fontFamily:'MontSerrat-regular',
+        fontFamily:'Montserrat-Regular',
         fontSize:20,
         fontWeight:'bold',
         color:'black',
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         justifyContent:'center'
     },
     link:{
-        fontFamily:'MontSerrat-regular',
+        fontFamily:'Montserrat-Regular',
         fontSize: 15,
         color: 'blue',
         textDecorationLine:'underline'
